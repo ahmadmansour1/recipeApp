@@ -1,0 +1,15 @@
+
+{
+  "recipe" : "recipe",
+  "@recipe": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "search": "search",
+   "@search":{
+     "description": "push"
+   },
+
+   "cook_with_us" : "cook with us ",
+   "find_best_recipe": "find your best recipe"
+
+}
