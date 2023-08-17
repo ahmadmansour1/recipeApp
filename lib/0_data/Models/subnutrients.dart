@@ -1,6 +1,4 @@
-import 'package:recipeapp/Models/subnutrients.dart';
-
-class Digest {
+class Nutrient {
   String? label;
   String? tag;
   String? schemaOrgTag;
@@ -8,9 +6,8 @@ class Digest {
   bool? hasRDI;
   double? daily;
   String? unit;
-  List<Nutrient>? sub; // List of Nutrient objects
 
-  Digest({
+  Nutrient({
     this.label,
     this.tag,
     this.schemaOrgTag,
@@ -18,11 +15,29 @@ class Digest {
     this.hasRDI,
     this.daily,
     this.unit,
-    this.sub,
   });
+  Nutrient copyWith({
+    String? label,
+    String? tag,
+    String? schemaOrgTag,
+    double? total,
+    bool? hasRDI,
+    double? daily,
+    String? unit,
+  }) {
+    return Nutrient(
+      label: label ?? this.label,
+      tag: tag ?? this.tag,
+      schemaOrgTag: schemaOrgTag ?? this.schemaOrgTag,
+      total: total ?? this.total,
+      hasRDI: hasRDI ?? this.hasRDI,
+      daily: daily ?? this.daily,
+      unit: unit ?? this.unit,
+    );
+  }
 
-  factory Digest.fromJson(Map<String, dynamic> json) {
-    return Digest(
+  factory Nutrient.fromJson(Map<String, dynamic> json) {
+    return Nutrient(
       label: json['label'],
       tag: json['tag'],
       schemaOrgTag: json['schemaOrgTag'],
@@ -30,9 +45,6 @@ class Digest {
       hasRDI: json['hasRDI'],
       daily: json['daily']?.toDouble(),
       unit: json['unit'],
-      sub: json['sub'] != null
-          ? (json['sub'] as List).map((item) => Nutrient.fromJson(item)).toList()
-          : null,
     );
   }
 
@@ -45,9 +57,6 @@ class Digest {
     data['hasRDI'] = hasRDI;
     data['daily'] = daily;
     data['unit'] = unit;
-    // Convert sub list to JSON
-    data['sub'] = sub?.map((item) => item.toJson()).toList();
     return data;
   }
 }
-

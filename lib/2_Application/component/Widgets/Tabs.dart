@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:recipeapp/Models/Nutrientss.dart';
-import 'package:recipeapp/Models/Recipe.dart';
-import 'package:recipeapp/Screens/DetailsScreen.dart';
-import 'package:recipeapp/Screens/NutrientsDetails.dart';
-import 'package:recipeapp/Screens/home.dart';
+
+import 'package:recipeapp/2_Application/pages/details_page/DetailsScreen.dart';
+import 'package:recipeapp/2_Application/pages/details_page/NutrientsDetails.dart';
+
+import '../../../0_data/Models/Recipe.dart';
+
+
+
+
+
 
 class Tabs extends StatefulWidget {
   final Recipe recipe;
@@ -32,7 +37,7 @@ class _TabsState extends State<Tabs>{
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => NutrientsDetails(recipe: widget.recipe ),
+            builder: (context) => NutrientsDetailsScreenProvider(recipe: widget.recipe ),
           ),
         );
       } else {
@@ -40,7 +45,7 @@ class _TabsState extends State<Tabs>{
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailsScreen(recipe: widget.recipe),
+            builder: (context) => DetailsScreenProvider(recipe: widget.recipe),
           ),
         );
       }

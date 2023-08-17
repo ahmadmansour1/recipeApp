@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:recipeapp/Screens/home.dart';
+import 'package:recipeapp/0_data/repo/data-rep.dart';
+import 'package:recipeapp/2_Application/pages/home_page/home.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() {
-  runApp(const MyApp());
+import '1_domain/repositories/repositories.dart';
+import '1_domain/usecase.dart';
+import '2_Application/pages/recipe_view/cubit/recipe_view_page_cubit.dart';
 
+void main() {
+  final FetchRecipe fetchRecipe = FetchRecipe(repositries: DataRepositories()); // Use the FetchRecipe use case
+  runApp(
+    BlocProvider(
+      create: (context) => RecipeViewPageCubit(fetchRecipe: fetchRecipe), // Pass the use case instance
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
