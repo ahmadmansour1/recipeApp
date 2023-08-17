@@ -1,26 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:recipeapp/Screens/RecipeView.dart';
 
-class SearchHistory extends StatefulWidget {
+
+class SearchHistory extends StatelessWidget {
   final Function() getQuery;
   String query;
   final bool showHistory;
   final List<String> searchHistory;
   SearchHistory({required this.query, required this.getQuery, required this.showHistory, required this.searchHistory}) : super();
 
-  @override
-  State<SearchHistory> createState() => _SearchHistoryState();
-}
-
-class _SearchHistoryState extends State<SearchHistory> {
-
-
   List<String> getSearchHistory(String query) {
     if (query.isEmpty) {
       return [];
     } else {
-      return widget.searchHistory
+      return searchHistory
           .where((item) => item.toLowerCase().startsWith(query.toLowerCase()))
           .toList();
     }
@@ -29,7 +22,7 @@ class _SearchHistoryState extends State<SearchHistory> {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible:  widget.showHistory && widget.query.isNotEmpty && getSearchHistory(widget.query).isNotEmpty,
+      visible:  showHistory && query.isNotEmpty && getSearchHistory(query).isNotEmpty,
       child: Container(
         width: 250,
         margin: const EdgeInsets.only(top: 60),
@@ -39,13 +32,13 @@ class _SearchHistoryState extends State<SearchHistory> {
           borderRadius: BorderRadius.circular(8),
         ),
         child: ListView.builder(
-          itemCount: getSearchHistory(widget.query).length,
+          itemCount: getSearchHistory(query).length,
           itemBuilder: (context, index) {
             return ListTile(
-              title: Text(getSearchHistory(widget.query)[index]),
+              title: Text(getSearchHistory(query)[index]),
               onTap: () {
-                widget.query = getSearchHistory(widget.query)[index];
-                widget.getQuery();
+                query = getSearchHistory(query)[index];
+               getQuery();
               },
             );
           },

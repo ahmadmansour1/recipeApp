@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:recipeapp/Screens/DetailsScreen.dart';
-import 'package:recipeapp/Models/Recipe.dart';
+import 'package:recipeapp/2_Application/pages/details_page/DetailsScreen.dart';
 
-import '../Screens/home.dart';
+import '../../../0_data/Models/Recipe.dart';
+
+
+
+
+
 
 class GridItem extends StatelessWidget {
-  List <Recipe> recipes ;
+  List <Recipe> recipes;
    GridItem({Key? key , required this.recipes }) : super(key: key);
 
 
@@ -23,7 +27,7 @@ class GridItem extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           onTap: (){
-            Navigator.of(context).push(MaterialPageRoute(builder:(context) => DetailsScreen(recipe:recipes[index])));
+            Navigator.of(context).push(MaterialPageRoute(builder:(context) => DetailsScreenProvider(recipe:recipes[index])));
           },
           child: Container(
             decoration: BoxDecoration(
